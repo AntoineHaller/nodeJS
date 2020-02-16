@@ -17,7 +17,7 @@ const golf_model = new Schema({
     type: Number,
     required: true
   },
-  descrition: {
+  description: {
     type: String,
     required: true,
     minlength: 5,

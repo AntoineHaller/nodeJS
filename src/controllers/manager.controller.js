@@ -62,7 +62,7 @@ exports.update = (req, res) => {
     .then(manager => {
       if (!manager) {
         return res.status(404).send({
-          message: "le manager cherché pour être modifier est introuvable"
+          message: "le manager spécifié n'existe pas"
         })
       }
       Manager.findById(req.params.id)

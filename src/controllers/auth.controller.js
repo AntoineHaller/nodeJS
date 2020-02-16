@@ -1,11 +1,11 @@
-const User = require('../models/user.model');
+const Admin = require('../models/admin.model');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 
 exports.signin = (req, res) => {
     let hashedPwd = bcrypt.hashSync(req.body.password, 8);
-    const user = new User({
+    const admin = new Admin({
       firstname: req.body.firstname,
       lastname: req.body.lastname,
       role: req.body.role,
@@ -13,11 +13,11 @@ exports.signin = (req, res) => {
       password: hashedPwd,
       admin: req.body.admin
     })
-    user.save()
+    admin.save()
       .then(data => {
           let token = jwt.sign({
-                  id: user.email,
-                  admin: user.admin
+                  id: admin.email,
+                  admin: admin.admin
               },
               "supersecret", {
                   expiresIn: 3600
@@ -42,12 +42,12 @@ exports.signin = (req, res) => {
 
 //login
 exports.login = (req, res) => {
-    User.findOne({ email: req.body.email },
-        function(err, user) {
-            if (!user) {
+    Admin.findOne({ email: req.body.email },
+        function(err, admin) {
+            if (!admin) {
               return res.status(404).send('utilisateur introuvable');
             }
-            let passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
+            let passwordIsValid = bcrypt.compareSync(req.body.password, admin.password);
             if (!passwordIsValid) {
               return res.status(401).send({
                 auth: false,
@@ -55,8 +55,8 @@ exports.login = (req, res) => {
               });
             }
             let token = jwt.sign({
-                    id: user._id,
-                    admin: user.admin
+                    id: admin._id,
+                    admin: admin.admin
                 },
                 "supersecret", {
                     expiresIn: 3600
@@ -65,7 +65,7 @@ exports.login = (req, res) => {
             res.status(200).send({
                 auth: true,
                 token: token,
-                data: user
+                data: admin
             })
         }
     )

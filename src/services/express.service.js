@@ -1,12 +1,12 @@
 const express = require('express');
 const config = require('../configs/server.config');
 const bodyParser = require('body-parser');
-const routes = require('../routes');
+const router = require('../routes/index');
 
 const app = express();
 
 app.use(bodyParser.json());
-app.use('/api-eval', routes);
+app.use('/api-eval/v1', router);
 
 exports.start = () => {
     let port = config.port;

@@ -3,7 +3,6 @@ const Manager = require('../models/manager.model');
 
 //Création d'un golf
 exports.create = (req, res) => {
-  token.authToken;
   Manager.findOne({
     lastname: req.body.managerLastname,
     firstname: req.body.managerFirstname
@@ -14,7 +13,6 @@ exports.create = (req, res) => {
         message: "golf introuvable"
       })
     }
-    let Manager = manager;
   }));
 
   const golf = new Golf({

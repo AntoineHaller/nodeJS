@@ -1,20 +1,20 @@
 const app = require('express');
-const routes = app.Router();
-const userRouter = require('./user.route');
-const managerRouter = require('./manager.route');
-const golfRouter = require('./golf.route');
-const authRouter = require('./auth.route');
+const router = app.Router();
+const adminRouter = require('./admin.routes');
+const managerRouter = require('./manager.routes');
+const golfRouter = require('./golf.routes');
+const authRouter = require('./auth.routes');
 
-//Utilisateur routes
-routes.use(userRouter);
+//Utilisateur router
+router.use(adminRouter);
 
-//Manager routes
-routes.use(managerRouter);
+//Manager router
+router.use(managerRouter);
 
-//Golf routes
-routes.use(golfRouter);
+//Golf router
+router.use(golfRouter);
 
-//Auth routes
-routes.use(authRouter);
+//Auth router
+router.use(authRouter);
 
-module.exports = routes;
+module.exports = router;

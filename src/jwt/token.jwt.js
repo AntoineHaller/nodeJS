@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const jwtConfig = require('../configs/jwt.config');
 
 //authentification token
 exports.authToken = (req, res, next) => {
@@ -9,7 +10,7 @@ exports.authToken = (req, res, next) => {
       message:"Pas de token: accès impossible"
     })
   }
-  jwt.verify(token, "supersecret", function(err, decoded) {
+  jwt.verify(token, jwtConfig.secret, function(err, decoded) {
     if (err) {
       return res.status(401).send({
         auth:false,
